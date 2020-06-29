@@ -1,0 +1,8 @@
+function H = Hconstr(N,a,m)
+% Ignore Planck's constant
+H = zeros(N);
+for i = 1:N
+    H(i,i) = -2;
+end
+H = -1/(2*m*a^2) * H;
+end
