@@ -1,0 +1,8 @@
+Hnew = zeros(size(H));
+for ii = 1:5
+    for jj = 1:5
+        if ii == jj
+            Hnew(ii,jj) = min(ii,5 - ii) * H(ii,jj);
+        elseif ii == jj + 1
+        elseif ii == jj - 1
+        else
