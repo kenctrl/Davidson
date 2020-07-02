@@ -1,12 +1,12 @@
 function Hnew = Hnewconstr(N,a,m,epsilon)
 % Ignore Planck's constant
 Hnew = zeros(N);
-for i = 1:N
-    Hnew(i,i) = -2;
+for ii = 1:N
+    Hnew(ii,ii) = -2;
 end
-for i = 1:N-1
-    Hnew(i+1,i) = 1;
-    Hnew(i,i+1) = 1;
+for ii = 1:N-1
+    Hnew(ii+1,ii) = 1;
+    Hnew(ii,ii+1) = 1;
 end
 Hnew(N,1) = 1;
 Hnew(1,N) = 1;

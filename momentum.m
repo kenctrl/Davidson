@@ -1,5 +1,5 @@
 function p = momentum(N)
 p = ones(N,1);
-for j = 1:N-1
-    p(j+1,1) = 2*j*pi/N;
+for jj = 1:N-1
+    p(jj+1,1) = 2*jj*pi/N;
 end
