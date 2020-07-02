@@ -12,11 +12,11 @@ for jj = 0:t
         end
     end
     
-    for kk = 0:N/2 - 2
-        if x(kk+1,1) > 0 && x(kk+2,1) == 0
-           x(kk+1,1) = 0;
-        else
-           edge(jj+1,1) = min(x(x>0));
-        end
-    end
+%     for kk = 0:N/2 - 2
+%         if x(kk+1,1) > 0 && x(kk+2,1) == 0
+%            x(kk+1,1) = 0;
+%         else
+%         end
+    edge(jj+1,1) = min(x(x>0));
+%      end
 end

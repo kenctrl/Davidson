@@ -1,4 +1,4 @@
-function multipletimeseries(N,t,a,m)
+function multipletimeseriesgraph(N,t,a,m)
 H = Hconstr(N,a,m);
 v = zeros(N,1);
 v(1,1) = 1;

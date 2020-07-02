@@ -13,12 +13,12 @@ for epsilon = 0:0.1:1
                 x(ii+1,1) = ii;
             end
         end
-        for kk = 0:N/2 - 2
-            if x(kk+1,1) > 0 && x(kk+2,1) == 0
-               x(kk+1,1) = 0;
-            else
+%         for kk = 0:N/2 - 2
+%             if x(kk+1,1) > 0 && x(kk+2,1) == 0
+%                x(kk+1,1) = 0;
+%             else
                edgetable(jj+1,round(epsilon*10) + 1) = min(x(x>0));
-            end
-        end
+%             end
+%         end
     end
 end
