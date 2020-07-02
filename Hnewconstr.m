@@ -12,6 +12,6 @@ Hnew(N,1) = 1;
 Hnew(1,N) = 1;
 for ii = 1:N
     for jj = 1:N
-        Hnew(ii,jj) = -1/2 * 1/((m + epsilon * (min(ii,N-ii) + min(jj,N-jj))/2) * a^2) * Hnew(ii,jj); %a^2 may not be coded in correctly
+        Hnew(ii,jj) = -1/2 * 1/(m * (1 + epsilon * (min(ii,N-ii) + min(jj,N-jj))/2) * a^2) * Hnew(ii,jj); %a^2 may not be coded in correctly
     end
 end
