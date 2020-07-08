@@ -1,4 +1,4 @@
-function [Kpeven,Kpodd] = momentumcouple(N)
+function [Kp,Kpphase,Kpeven,Kpodd] = momentumcouple(N)
 K = zeros(N,1);
 
 for jj = -N/2:N/2-1

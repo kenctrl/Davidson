@@ -5,4 +5,3 @@ Klc = a*Kpeven + b*Kpodd;
 EA = HA*Klc;
 EB = HB*Klc;
 end
-

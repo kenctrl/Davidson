@@ -1,5 +1,5 @@
 function trottertimeseriesgraph(N,m,step,t)
-[HA,HB] = trotterapproximation(N,m);
+[HA,HB] = trotterconstr(N,m);
 evoleff = expm(-i*HA*step) * expm(-i*HB*step);
 v = zeros(N,1);
 v(1,1) = 1;
