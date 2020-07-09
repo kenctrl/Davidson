@@ -1,7 +1,8 @@
-function trottersingletimepeak(N,m,dt,tend)
+function trottersingletimepeakpotential(N,m,dt,tend,potential)
 [HA,HB] = trotterconstr(N,m);
-% evoleff = expm(-i*HA*dt) * expm(-i*HB*dt); (Same as Line 4)
-evoleff = expm(-i*(HA+HB)*dt);
+Heff = HA + HB;
+Heff(1,1) = Heff(1,1) + potential;
+evoleff = expm(-i*Heff*dt);
 v = zeros(N,1);
 v(1,1) = 1;
 plot(0,(abs(v(1,1))).^2,'b.');

@@ -1,8 +1,8 @@
 function [Kp,Kpphase,Kpeven,Kpodd] = momentumcouple(N)
 K = zeros(N,1);
 
-for jj = -N/2:N/2-1
-    K(jj + N/2 + 1,1) = exp(i*(jj + N/2)*2*pi*jj*(1/N));
+for jj = 1:N-1
+    K(jj+1,1) = exp(i*2*pi*jj*(1/N));
 end
 K = 1/sqrt(N) * K;
 
