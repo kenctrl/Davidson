@@ -1,4 +1,4 @@
-function [V0,V1] = singletimepeakPC(N,t,a,m,Hobj)
+function [v_PC] = singletimepeakPC(N,t,a,m,Hobj)
 HPC = HPCconstr(N,a,m,Hobj);
 v = wavefunctionPC(N);
 for jj = 0:t
@@ -9,8 +9,9 @@ for jj = 0:t
     hold on
 end
 psi1 = expm(-i*HPC*t)*v;
+% psi1 = abs(psi1).^2
 V0 = psi1(1,1) + psi1(2,1);
 V1 = psi1(N+1,1) + psi1(N+2,1);
-V_PC_largest_magnitude = max(abs(V0),abs(V1));
-V0 = V0/V_PC_largest_magnitude;
-V1 = V1/V_PC_largest_magnitude;
+v_PC = [V0;V1];
+index = find(abs(v_PC) == max(abs(v_PC)));
+v_PC = v_PC/v_PC(index);

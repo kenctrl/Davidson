@@ -1,7 +1,8 @@
 function [HPC] = HPCconstrN(N,a,m,Hobj)
 H = Hconstr(N,a,m);
 eigs = eig(Hobj);
-Hobj = 0.6/(eigs(2,1)-eigs(1,1)) * (Hobj - (eigs(1,1)+eigs(2,1))/2 * eye(2));
+eigs = sort(eigs);
+Hobj = 0.6/(eigs(2,1)-eigs(1,1)) * (Hobj - (eigs(1,1)+eigs(2,1))/2 * eye(N));
 
 H1 = H;
 H1(1:2,1:2) = H1(1:2,1:2) + 1/2*ones(2) * Hobj(1,1);
