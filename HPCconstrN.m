@@ -1,4 +1,4 @@
-function [HPC] = HPCconstr(N,a,m,Hobj)
+function [HPC] = HPCconstrN(N,a,m,Hobj)
 H = Hconstr(N,a,m);
 eigs = eig(Hobj);
 Hobj = 0.6/(eigs(2,1)-eigs(1,1)) * (Hobj - (eigs(1,1)+eigs(2,1))/2 * eye(2));

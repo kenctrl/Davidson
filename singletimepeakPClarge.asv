@@ -1,4 +1,4 @@
-function [V0,V1] = singletimepeakPClarge(N,dt,a,m,subdivisions,Hobj)
+function [psi1,V0n,V1] = singletimepeakPClarge(N,dt,a,m,subdivisions,Hobj)
 H = HPCconstr(N,a,m,Hobj);
 v = wavefunctionPC(N);
 
@@ -11,6 +11,11 @@ end
 
 V0 = psi1(1,1) + psi1(2,1);
 V1 = psi1(N+1,1) + psi1(N+2,1);
-V_PC_largest_magnitude = max(abs(V0),abs(V1));
-V0 = V0/V_PC_largest_magnitude;
-V1 = V1/V_PC_largest_magnitude;
+
+if abs(V0) >= abs(V1)
+    V0n = V0;
+    V1n = V1/V0;
+else
+    V0n = V0/V1;
+    V1n = V1;
+end

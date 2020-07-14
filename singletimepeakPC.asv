@@ -8,9 +8,11 @@ for jj = 0:t
     plot(jj,psi(N+1,1)+psi(N+2,1),'r.');
     hold on
 end
-psi1 = expm(-i*HPC*t)*v;
-V0 = psi1(1,1) + psi1(2,1);
-V1 = psi1(N+1,1) + psi1(N+2,1);
-V_PC_largest_magnitude = max(abs(V0),abs(V1));
-V0 = V0/V_PC_largest_magnitude;
-V1 = V1/V_PC_largest_magnitude;
+
+figure
+for jj = 0:t
+    psi = (abs(expm(-i*HPC*jj)*v)).^2;
+
+end
+
+expm(-i*HPC*jj)*v
