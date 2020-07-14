@@ -1,16 +1,16 @@
 function [HPC] = HPCconstrN(N,a,m,Hobj)
 H = Hconstr(N,a,m);
+[r,c] = size(Hobj);
 eigs = eig(Hobj);
 eigs = sort(eigs);
-Hobj = 0.6/(eigs(2,1)-eigs(1,1)) * (Hobj - (eigs(1,1)+eigs(2,1))/2 * eye(N));
+Hobj = 0.6/(eigs(r,1)-eigs(1,1)) * (Hobj - (eigs(1,1)+eigs(r,1))/2 * eye(r,c));
 
-H1 = H;
-H1(1:2,1:2) = H1(1:2,1:2) + 1/2*ones(2) * Hobj(1,1);
-H2 = H;
-H2(1:2,1:2) = H2(1:2,1:2) + 1/2*ones(2) * Hobj(2,2);
-Z = zeros(N);
-Z1 = Z;
-Z1(1:2,1:2) = Z1(1:2,1:2) + 1/2*ones(2) * Hobj(1,2);
-Z2 = Z;
-Z2(1:2,1:2) = Z2(1:2,1:2) + 1/2*ones(2) * Hobj(2,1);
-HPC = [H1 Z1; Z2 H2];
+HPC = zeros(r*N,c*N);
+for ii = 1:r
+    for jj = 1:c
+        if ii == jj
+            HPC((ii-1)*N+1:ii*N,(ii-1)*N+1:ii*N) = H;
+        end
+        HPC((ii-1)*N+1:(ii-1)*N+2,(jj-1)*N+1:(jj-1)*N+2) = HPC((ii-1)*N+1:(ii-1)*N+2,(jj-1)*N+1:(jj-1)*N+2) + 1/2*ones(2) * Hobj(ii,jj);
+    end
+end

@@ -8,7 +8,7 @@ psi1(:,1) = exponentiate(v,H,-i*dt,subdivisions);
 for jj = 1:N-1
     psi1(:,jj+1) = exponentiate(psi1(:,jj),H,-i*dt,subdivisions);
 end
-% psi1 = abs(psi1).^2;
+
 V0 = psi1(1,1) + psi1(2,1);
 V1 = psi1(N+1,1) + psi1(N+2,1);
 v_PC = [V0;V1];

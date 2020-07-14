@@ -9,7 +9,6 @@ for jj = 0:t
     hold on
 end
 psi1 = expm(-i*HPC*t)*v;
-% psi1 = abs(psi1).^2
 V0 = psi1(1,1) + psi1(2,1);
 V1 = psi1(N+1,1) + psi1(N+2,1);
 v_PC = [V0;V1];

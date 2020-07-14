@@ -1,16 +1,18 @@
-function [VN] = PCN(N,t,a,m,Hobj)
-HPC = HPCconstr(N,a,m,Hobj);
-v = wavefunctionPC(N);
-for jj = 0:t
-    psi = (abs(expm(-i*HPC*jj)*v)).^2;
-    plot(jj,psi(1,1)+psi(2,1),'b.');
-    hold on
+function [v_PC] = PCN(N,dt,a,m,subdivisions,Hobj)
+[r,c] = size(Hobj);
+HPC = HPCconstrN(N,a,m,Hobj);
+v = wavefunctionPCN(r,N);
+
+psi1 = zeros(r*N);
+psi1(:,1) = exponentiate(v,HPC,-i*dt,subdivisions);
+
+for jj = 1:N-1
+    psi1(:,jj+1) = exponentiate(psi1(:,jj),HPC,-i*dt,subdivisions);
 end
-V0 = psi(1,1) + psi(2,1);
-figure
-for jj = 0:t
-    psi = (abs(expm(-i*HPC*jj)*v)).^2;
-    plot(jj,psi(N+1,1)+psi(N+2,1),'r.');
-    hold on
+
+v_PC = zeros(r,1);
+for kk = 1:r
+    v_PC(kk,1) = psi1((kk-1)*N+1,1) + psi1((kk-1)*N+2,1);
 end
-V1 = psi(N+1,1) + psi(N+2,1);
+index = find(abs(v_PC) == max(abs(v_PC)));
+v_PC = v_PC/v_PC(index);
