@@ -17,8 +17,7 @@ if mineig < 0
 end
 
 if mineig == 0
-    Hobj = Hobj - 0.3*eye(r);
-end
+    Hobj = Hobj - 
 
 eigsnew = eig(Hobj);
 maxeig_abs = max(abs(eigsnew));
