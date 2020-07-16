@@ -6,10 +6,6 @@ v = wavefunctionPCN(r,N);
 psi1 = zeros(r*N);
 psi1(:,1) = exponentiate(v,HPC,-i*dt,subdivisions);
 
-for jj = 1:N-1
-    psi1(:,jj+1) = exponentiate(psi1(:,jj),HPC,-i*dt,subdivisions);
-end
-
 v_PC = zeros(r,1);
 for kk = 1:r
     v_PC(kk,1) = psi1((kk-1)*N+1,1) + psi1((kk-1)*N+2,1);
