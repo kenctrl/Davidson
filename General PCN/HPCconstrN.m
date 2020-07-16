@@ -1,6 +1,5 @@
-function [HPC] = HPCconstrNorig(N,a,m,Hobj)
-% H = Hconstr(N,a,m);
-H = Hconstrwithoutdiag(N,a,m);
+function [HPC] = HPCconstrN(N,a,m,Hobj)
+H = Hconstrwithoutdiag(N,a,m); %Initialize without diagonal
 [r,c] = size(Hobj);
 list = sort(eig(Hobj));
 H_objnew = (Hobj-(list(1)+list(2))/2*eye(r));

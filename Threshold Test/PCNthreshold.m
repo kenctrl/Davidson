@@ -1,17 +1,17 @@
-function PCN(N,dt,a,m,subdivisions,Hobj)
+function PCNthreshold(N,t,nt,a,m,subdivisions,Hobj)
 [r,c] = size(Hobj);
 HPC = HPCconstrNorig(N,a,m,Hobj);
 v = wavefunctionPCN(r,N);
 
-psi1 = zeros(r*N,subdivisions+2);
+psi1 = zeros(r*N,nt+2);
 
 psi1(:,1) = exponentiate(v,HPC,0,subdivisions);
-ddt = dt/subdivisions;
-psi1(:,2) = exponentiate(v,HPC,ddt,subdivisions);
 
+dt = t/nt;
+psi1(:,2) = exponentiate(v,HPC,-i*dt,subdivisions);
 
-for jj = ddt:ddt:dt
-    psi1(:,jj/ddt+2) = exponentiate(v,HPC,-i*jj,subdivisions);
+for jj = 2:nt
+    psi1(:,jj+1) = exponentiate(psi1(:,jj),HPC,-i*dt,subdivisions);
 end
 
 % v_PC = zeros(r,dt);
@@ -21,10 +21,10 @@ end
 %     end
 % end
 
-for ii = 0:ddt:dt
-    plot(ii,abs(psi1(0*N+1,ii/ddt+1)+psi1(0*N+2,ii/ddt+1)).^2,'b.');
+for ii = 0:dt:t
+    plot(ii,abs(psi1(0*N+1,ii/dt+1)+psi1(0*N+2,ii/dt+1)).^2,'b.');
     hold on
-    plot(ii,abs(psi1(1*N+1,ii/ddt+1)+psi1(1*N+2,ii/ddt+1)).^2,'r.');
+    plot(ii,abs(psi1(1*N+1,ii/dt+1)+psi1(1*N+2,ii/dt+1)).^2,'r.');
     hold on
 end
 
