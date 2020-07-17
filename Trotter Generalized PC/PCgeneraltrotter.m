@@ -1,8 +1,7 @@
-function [v_PC,v_exact,initial_overlap,final_overlap] = PCgeneral(N,t,nt,a,m,subdivisions,Hobj,v_input)
+function [v_PC,v_exact,initial_overlap,final_overlap] = PCgeneraltrotter(N,t,nt,a,m,subdivisions,Hobj,v_input)
 [r,~] = size(Hobj);
-
-%Construct Hamiltonian
-HPC = HPCconstrN(N,a,m,Hobj);
+[HPC_A,HPC_B,Hobjmatrix] = Htrotterconstr(N,m,Hobj);
+HPC = HPC_A + HPC_B + Hobjmatrix;
 
 %Construct or initialize wave function & find initial PC eigenstate
 if v_input == 0
@@ -28,16 +27,14 @@ end
 %Plot time evolution of each state
 X = [0:dt:t-dt]';
 Y = zeros(size(X,1),r);
+colorInd = 'brcky';
 for h = 1:r
-for ii = 0:dt:t-dt
-    Y(ii/dt+1,h) = log(abs(psi1((h-1)*N+1,ii/dt+1)+psi1((h-1)*N+2,ii/dt+1)).^2);
-    Y(ii/dt+1,1) = log(abs(psi1(1*N+1,ii/dt+1)+psi1(1*N+2,ii/dt+1)).^2);
-end
-end
-plot(X,Y1,'b.');
+    for ii = 0:dt:t-dt
+        Y(ii/dt+1,h) = log(abs(psi1((h-1)*N+1,ii/dt+1)+psi1((h-1)*N+2,ii/dt+1)).^2);
+    end
+plot(X,Y(:,h),['.' colorInd(h)]);
 hold on
-plot(X,Y2,'r.');
-hold on
+end
 xlabel('Time','FontSize', 16);
 ylabel('ln(|\psi|^2) for Each State','FontSize', 16);
 
