@@ -8,3 +8,5 @@ for jj = 0:t
     plot(jj,psi(1,1),'b.');
     hold on
 end
+xlabel('Time','FontSize', 16)
+ylabel('|\psi|^2 at Initial Position','FontSize', 16)
