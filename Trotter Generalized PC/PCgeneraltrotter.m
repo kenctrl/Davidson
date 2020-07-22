@@ -37,6 +37,7 @@ hold on
 end
 xlabel('Time','FontSize', 16);
 ylabel('ln(|\psi|^2) for Each State','FontSize', 16);
+legend('State 1 (Up)','State 2 (Down)')
 
 %Find bound eigenstate calculated by PC
 v_PC = zeros(r,1);

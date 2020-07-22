@@ -4,7 +4,7 @@ H = Hconstrwithoutdiag(N,a,m); %Initialize without diagonal
 list = sort(eig(Hobj));
 H_objnew = (Hobj-(list(1)+list(2))/2*eye(r));
 scale = max(eig(H_objnew));
-H_objnew = H_objnew/scale*0.5;
+H_objnew = H_objnew/scale*0.8;
 
 HPC = zeros(r*N,c*N);
 for ii = 1:r

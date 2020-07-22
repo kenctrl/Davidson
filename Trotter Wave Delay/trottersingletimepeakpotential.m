@@ -16,3 +16,6 @@ for jj = 2*dt:dt:tend
     plot(jj,(abs(evol(1,1))).^2,'b.');
     hold on
 end
+xlabel('Time','FontSize', 16);
+ylabel('|\psi|^2 at Initial Position','FontSize', 16);
+title('Projected Cooling Wave Reflection','FontSize', 16);

@@ -1,4 +1,4 @@
-function [v_PC,v_exact,initial_overlap,final_overlap] = PCgeneral(N,t,nt,a,m,subdivisions,Hobj,v_input)
+function [v_PC,v_exact,initial_overlap,final_overlap,final_overlapall] = PCgeneral(N,t,nt,a,m,subdivisions,Hobj,v_input,hh,final_overlapall)
 [r,~] = size(Hobj);
 
 %Construct Hamiltonian
@@ -28,7 +28,8 @@ end
 %Plot time evolution of each state
 X = [0:dt:t-dt]';
 Y = zeros(size(X,1),r);
-colorInd = 'brcky';
+colorInd = 'brckybrckybrckybrckybrckybrcky';
+figure
 for h = 1:r
     for ii = 0:dt:t-dt
         Y(ii/dt+1,h) = log(abs(psi1((h-1)*N+1,ii/dt+1)+psi1((h-1)*N+2,ii/dt+1)).^2);
@@ -38,6 +39,8 @@ hold on
 end
 xlabel('Time','FontSize', 16);
 ylabel('ln(|\psi|^2) for Each State','FontSize', 16);
+%legend('State 1','State 2','State 3');
+title('Projected Cooling Sensor Algorithm for Arbitrary 30x30','FontSize', 14);
 
 %Find bound eigenstate calculated by PC
 v_PC = zeros(r,1);
@@ -57,7 +60,9 @@ if size(v_exact,2) ~= size(v_PC,2)
 end
 
 %Find overlap between initial PC eigenstate and exact eigenstate
-initial_overlap = abs(v_exact'*vobj_initial)/(sqrt(v_exact'*v_exact)*sqrt(vobj_initial'*vobj_initial));
+initial_overlap = (abs(v_exact'*vobj_initial)/(sqrt(v_exact'*v_exact)*sqrt(vobj_initial'*vobj_initial)))^2;
 
 %Find overlap between final PC eigenstate and exact eigenstate
-final_overlap = abs(v_PC'*v_exact)/(sqrt(v_exact'*v_exact)*sqrt(v_PC'*v_PC));
+final_overlap = (abs(v_PC'*v_exact)/(sqrt(v_exact'*v_exact)*sqrt(v_PC'*v_PC)))^2;
+disp(final_overlap)
+final_overlapall(hh+1,1) = final_overlap;
