@@ -1,5 +1,5 @@
 L = 100;
-D_object = 30;
+D_object = 2;
 maxeig = 0.5;
 nrepeat = 30;
 r = [0:L-1];

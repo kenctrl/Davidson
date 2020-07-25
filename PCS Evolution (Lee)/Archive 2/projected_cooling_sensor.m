@@ -4,8 +4,8 @@ close all
 format long
 
 L = 20;
-D_object = 50;
-maxeig = 10.;
+D_object = 10;
+maxeig = 0.8;
 nrepeat = 40;
 r = [0:L-1];
 
@@ -13,7 +13,7 @@ H_reservoir = ...
     - sparse(mod(r+1,L)+1,r+1,0.5) ...
     - sparse(mod(r-1,L)+1,r+1,0.5);
 
-H_object = (rand(D_object,D_object)-0.5) + i*(rand(D_object,D_object)-0.5);
+H_object = rand(D_object,D_object) + i*rand(D_object,D_object);
 H_object = 0.5*(H_object + H_object');
 
 list = sort(eig(H_object));
@@ -46,12 +46,10 @@ v_init = zeros(D_object*L,1);
 for ii = 0:D_object-1
     vobject_init(ii+1) = (rand-0.5) + i*(rand-0.5);
 end
-vobject_init = vobject_init/sqrt(vobject_init'*vobject_init)
 
 %%%%%
-%vobject_init = 0.5*vobject_init + 0.5*vv_exact_normalized;
+% vobject_init = 0.5*vobject_init + 0.5*vv_exact_normalized;
 %%%%%
-
 vobject_init = vobject_init/sqrt(vobject_init'*vobject_init);
 
 vobject_init_save = vobject_init;
@@ -127,8 +125,6 @@ for ntrial = 1:nrepeat
             shift = s9*(Lt10-nt)/(Lt10-Lt9)+s10*(nt-Lt9)/(Lt10-Lt9);           
         end
         
-        shift = shift - 0.00*mod(ntrial,4)*(1+(-1)^nt);
-        
         for ii = 0:D_object-1
             H(ii*L+1,ii*L+1) = H_apex(ii*L+1,ii*L+1) + shift/2.0;
             H(ii*L+2,ii*L+1) = H_apex(ii*L+2,ii*L+1) + shift/2.0;
@@ -187,11 +183,4 @@ squared_norm
 
 "H_object_new eigenvalues"
 eig(H_object_new)
-
-for nn = 1:D_object
-   strength(nn) = abs(vv(:,nn)'*v_PC)^2;
-end
-
-figure(nrepeat+2)
-scatter(diag(dd),strength)
 

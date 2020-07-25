@@ -1,0 +1,18 @@
+function v_evolved = exponentiate(v_in,H_matrix,dt_in,subdivisions)
+%EXPONENTIATE performs time evolution on an inpute state using a Taylor
+%approximation of the input Hamiltonian.
+%   v_in is the input state.
+%   H_matrix is the input Hamiltonian.
+%   dt is the time step for which time evolution occurs. dt_in is defined
+%   as dt multiplied by a factor of -i when using EXPONENTIATE.
+%   subdivisions is the number of times the Taylor approximation is used in
+%   the time step.
+
+%Split the time step based on the number of subdivisions.
+ddt = dt_in/subdivisions;
+
+%Define v_evolved to be equal to the 
+v_evolved = v_in + ddt*H_matrix*v_in + ddt^2/2*H_matrix*(H_matrix*v_in) + ddt^3/6*H_matrix*(H_matrix*(H_matrix*v_in));
+for nt = 1:subdivisions-1
+    v_evolved = v_evolved + ddt*H_matrix*v_evolved + ddt^2/2*H_matrix*(H_matrix*v_evolved) + ddt^3/6*H_matrix*(H_matrix*(H_matrix*v_evolved));
+end
