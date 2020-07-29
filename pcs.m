@@ -10,7 +10,7 @@ subdivisions = 10;
 H_reservoir = - sparse(mod(r+1,L)+1,r+1,0.5) - sparse(mod(r-1,L)+1,r+1,0.5);
 H_object = rand(D_object,D_object) + i*rand(D_object,D_object);
 H_object = 0.5*(H_object + H_object');
-% H_object = [1 0; 0 -1];
+%  H_object = [1 0; 0 -1];
 
 list = sort(eig(H_object));
 H_object_new = H_object-(list(1)+list(2))/2*eye(D_object);
